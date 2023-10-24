@@ -39,25 +39,27 @@ function mostCommon(text) {
     return null;
   }
   const textArray = text.split(" ")
-  let memoryArray = []; //array with the first object from textArray inside
-  let commonWord = 0; //variable of 0
-  textArray.forEach(word => { //runs each word in text array through a function
-    if (memoryArray.includes(word)) {
+  let memoryArray = []; 
+  let commonWord = 0; 
+  textArray.forEach(word => {
+    if (memoryArray.includes(word.toLowerCase())) {
       commonWord++;
     } else {
-      memoryArray.push(word);
+      memoryArray.push(word.toLowerCase());
     }
     })
-    mostCommonDisplay(memoryArray);
+    mostCommonNumbered(memoryArray, textArray);
   }
 
-
-  // memoryArray.forEach(word => {
-  //   let li = document.createElement("li");
-  //   li.append(word);
-  //   ul.append(li);
-  // })
-
+  function mostCommonNumbered (memoryArray, textArray) {
+    let displayArray = [];
+    memoryArray.forEach(unique => {
+      let count = 0;
+      textArray.forEach((word) => (word.toLowerCase() === unique.toLowerCase() && count++));
+      displayArray.push([unique, count]);
+    })
+    mostCommonDisplay(displayArray);
+  }
 
 function bannedWords(text) {
   let safeWordArray = [];
@@ -80,11 +82,11 @@ function bannedWords(text) {
 
 //UI Logic
 
-function mostCommonDisplay(memoryArray) {
+function mostCommonDisplay(displayArray) {
   const ul = document.querySelector("ul#memory-array");
-  memoryArray.forEach(word => {
+  displayArray.forEach(pair => {
     let li = document.createElement("li");
-    li.append(word);
+    li.append(pair);
     ul.append(li);
   });
 }
@@ -113,6 +115,7 @@ function boldPassage(word, text) {
 
 function handleFormSubmission(event) {
   event.preventDefault();
+  document.querySelector("ul#memory-array").replaceChildren();
   const passage = document.getElementById("text-passage").value;
   const word = document.getElementById("word").value;
   const wordCount = wordCounter(passage);
