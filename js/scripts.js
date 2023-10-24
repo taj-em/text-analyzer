@@ -56,29 +56,14 @@ function mostCommon(text) {
     memoryArray.forEach(unique => {
       let count = 0;
       textArray.forEach((word) => (word.toLowerCase() === unique.toLowerCase() && count++));
-      displayArray.push([unique, count]);
+      displayArray.push([count, unique]);
     })
-    mostCommonDisplay(displayArray);
+    mostCommonDisplay(displayArray.sort().reverse());
   }
 
-function bannedWords(text) {
-  let safeWordArray = [];
-  const textArray = text.split(" ");
-  textArray.forEach(word => {
-    if (word.toLowerCase().includes("zoinks")) {
-      word = "";
-    } else if (word.toLowerCase().includes("muppeteer")) {
-      word = "";
-    } else if (word.toLowerCase().includes("biffaroni")) {
-      word = "";
-    } else if (word.toLowerCase().includes("loopdaloop")) {
-      word = "";
-    } else {
-      safeWordArray.push(word);
-    }
-  })
-  return safeWordArray;
-}
+  function mostCommonSorted(displayArray) {
+    console.log(displayArray[0[0][1]])
+  }
 
 //UI Logic
 
