@@ -61,10 +61,6 @@ function mostCommon(text) {
     mostCommonDisplay(displayArray.sort().reverse());
   }
 
-  function mostCommonSorted(displayArray) {
-    console.log(displayArray[0[0][1]])
-  }
-
 //UI Logic
 
 function mostCommonDisplay(displayArray) {
@@ -74,28 +70,6 @@ function mostCommonDisplay(displayArray) {
     li.append(pair);
     ul.append(li);
   });
-}
-
-
-function boldPassage(word, text) {
-  if (isEmpty(text) || isEmpty(word)) {
-    return null;
-  }
-  const textArray = text.split(" ");
-  let p = document.createElement("p");
-  textArray.forEach(element, index => {
-    if (element.toLowerCase().includes(word.toLowerCase())) {
-      bold = document.createElement("strong")
-      bold.append(element);
-      p.append(bold);
-    } else {
-      p.append(element)
-    }
-    if (index !== (textArray.length - 1)) {
-      p.append(" ");
-    }
-  })
-  return p;
 }
 
 function handleFormSubmission(event) {
@@ -108,12 +82,6 @@ function handleFormSubmission(event) {
   document.getElementById("total-count").innerText = wordCount;
   document.getElementById("selected-count").innerText = occurencesOfWord;
   mostCommon(passage);
-  let boldedPassage = boldPassage(word, passage);
-  if (boldedPassage) {
-    document.querySelector("div#bolded-passage").append(boldedPassage);
-  } else {
-    document.querySelector("div#bolded-passage").innerText = null;
-  }
 }
 
 window.addEventListener("load", function () {
